@@ -8,6 +8,17 @@ export const Navbar = () => {
         navigate('/');
     };
 
+	#esta funcion ira en login, hay que llamar al endpoint, añadir useeffect con terciario 
+	const handleLogin = async () => {
+		const response = fetch(`${URL}/login`,{method:"POST",headers:{'Content-Type:application/json'} ,body:JSON.stringify({email:email, password:password})})
+		const data = await response.json()
+
+		if (data.access_token) {
+			localStorage.setItem("token", data.access_token)
+			navigate('/user');
+		}
+
+    };
 	return (
 		<nav className="navbar p-3 m-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
 			<div className="container">
