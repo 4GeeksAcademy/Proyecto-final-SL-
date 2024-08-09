@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			users: [],
 			message: null,
 			demo: [
 				{
@@ -15,11 +16,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			]
 		},
+
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+			loggin: async(email, password) => {
+                try {
+                    let response = await fetch("https://fictional-pancake-976q5g6769jp37p.github.dev/api/loggin", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "email": email,
+                            "password": password
+                        })
+
+                    })
+
+                    const data = await response.json()
+                    localStorage.setItem("token", data.access_token);
+                    return true
+
+                }   catch (error) {
+                    return false 
+                }
+        },
 
 			getMessage: async () => {
 				try{

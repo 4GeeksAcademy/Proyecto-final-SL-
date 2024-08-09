@@ -5,8 +5,76 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
-
-body{
-    color: aqua;
+body { 
+    background-image: url('/workspaces/Proyecto-final-SL-/src/front/img/HollybikeSonia.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
     background-color: aliceblue;
+}
+
+.loggin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.loggin-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.loggin-container label {
+    color: #fafaf9;
+    width: 100%;
+    text-align: center;
+    background-color: #1313137f;
+    font-size: 2rem; 
+    margin-bottom: 10px;
+}
+
+.loggin-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(248, 245, 33);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.loggin-container input:focus {
+    animation: inputFocus 0.5s ease-in-out forwards;
+}
+
+.loggin-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1313137f;
+    color: #fafaf9;
+    font-size: 1.7rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.loggin-container button:hover {
+    background-color: rgb(248, 245, 33);
+}
+
+@keyframes inputFocus {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 238, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 10px 5px rgba(255, 238, 0, 0.7);
+    }
+}
+
+footer {
+    background-color: rgb(248, 245, 33);
+    text-align: center;
 }
