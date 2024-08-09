@@ -6,11 +6,30 @@ from api.models import db, User, Photo, Order, OrderItems
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from flask_cors import CORS
+from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+from msrest.authentication import ApiKeyCredentials
 
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+ENDPOINT = "https://westeurope.api.cognitive.microsoft.com/"
+project_id = "4a0d1a7e-a87e-43e2-838c-3eec869f5aeb"
+prediction_key = "225ae10ed4e14b4ea2a4e56ac1a9474f"
+publish_iteration_name ="Iteration4"
+prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
+predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+
+with open("/workspaces/Proyecto-final-SL-/src/front/img/HollybikeSonia.PNG", node="rb") as test_data:
+    results = predictor.detect_image(project_id, publish_iteration_name, test_data)
+
+for prediction in results.predictions:
+    print("\t" + prediction.tag_name + """": {0:.2f}% bbox.left = {1:.2f}, bbox.top = {2:.2f},
+          bbox.width = {3:.2f}, bbox.height = {4:.2f}""".format(prediction.probability * 100, prediction.bounding_box.left,
+          prediction.bounding_box.top,prediction.bounding_box.width,prediction.bounding_box.height))
+
+
  
 @api.route('/users', methods = ['GET'])
 def get_users(): 
